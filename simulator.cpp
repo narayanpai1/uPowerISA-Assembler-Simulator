@@ -45,11 +45,12 @@ ll to_decimal(vll v)
 	return rv;
 }
 
+
 struct fields
 {
 	ll po, rs, ra, rb, xo, rc;
 	//NOTE THE DIFFERENCE B/W sh, SH
-	ll sh, SH;
+	ll sh, SH,sh1;
 	ll rt, si, mb, me, bo, bi, bd, aa, lk, oe, ds, li;
 };
 fields to_x(vll v)
@@ -90,7 +91,7 @@ fields to_x(vll v)
 	return x;
 }
 
-fields fields_to_i(vll v)
+fields to_i(vll v)
 {
 	fields x;
 	vll po, li, aa, lk;
@@ -118,12 +119,239 @@ fields fields_to_i(vll v)
 	return x;
 }
 
+fields to_xo(vll v){
+
+	fields x;
+	vll po,rt,ra,rb,oe,xo,rc;
+
+	fr(i,0,6){
+		po.push_back(v[i]);
+	}
+	fr(i,6,11){
+		rt.push_back(v[i]);
+	}
+	fr(i,11,16){
+		ra.push_back(v[i]);
+	}
+	fr(i,16,21){
+		rb.push_back(v[i]);
+	}
+	fr(i,21,22){
+		oe.push_back(v[i]);
+	}
+	fr(i,22,31){
+		xo.push_back(v[i]);
+	}
+	fr(i,31,32){
+		rc.push_back(v[i]);
+	}
+
+	x.po = to_decimal(po);
+	x.rt = to_decimal(rt);
+	x.ra = to_decimal(ra);
+	x.rb = to_decimal(rb);
+	x.oe = to_decimal(oe);
+	x.xo = to_decimal(xo);
+	x.rc = to_decimal(rc);
+
+	return x;
+}
+
+fields to_xs(vll v){
+
+	fields x;
+	vll po,rs,ra,sh,xo,sh1,rc;
+
+	fr(i,0,6){
+		po.push_back(v[i]);
+	}
+	fr(i,6,11){
+		rs.push_back(v[i]);
+	}
+	fr(i,11,16){
+		ra.push_back(v[i]);
+	}
+	fr(i,16,21){
+		sh.push_back(v[i]);
+	}
+	fr(i,21,30){
+		xo.push_back(v[i]);
+	}
+	fr(i,30,31){
+		sh1.push_back(v[i]);
+	}
+	fr(i,31,32){
+		rc.push_back(v[i]);
+	}
+
+	x.po = to_decimal(po);
+	x.rs = to_decimal(rs);
+	x.ra = to_decimal(ra);
+	x.sh = to_decimal(sh);
+	x.xo = to_decimal(xo);
+	x.sh1 = to_decimal(sh1);
+	x.rc = to_decimal(rc);
+
+	return x;
+}
+
+fields to_d(vll v)
+{
+	fields x;
+	vll po, rt, ra, si;
+	fr(i, 0, 6)
+	{
+		po.push_back(v[i]);
+	}
+	fr(i, 6, 11)
+	{
+		rt.push_back(v[i]);
+	}
+	fr(i, 11, 16)
+	{
+		ra.push_back(v[i]);
+	}
+	fr(i, 16, 32)
+	{
+		si.push_back(v[i]);
+	}
+	x.po = to_decimal(po);
+	x.rt = to_decimal(rt);
+	x.ra = to_decimal(ra);
+	x.si = to_decimal(si);
+
+	return x;
+}
+
+fields to_m(vll v){
+
+	fields x;
+	vll po,rs,ra,SH,mb,me,rc;
+
+	fr(i,0,6){
+		po.push_back(v[i]);
+	}
+	fr(i,6,11){
+		rs.push_back(v[i]);
+	}
+	fr(i,11,16){
+		ra.push_back(v[i]);
+	}
+	fr(i,16,21){
+		SH.push_back(v[i]);
+	}
+	fr(i,21,26){
+		mb.push_back(v[i]);
+	}
+	fr(i,26,31){
+		me.push_back(v[i]);
+	}
+	fr(i,31,32){
+		rc.push_back(v[i]);
+	}
+
+	x.po = to_decimal(po);
+	x.rs = to_decimal(rs);
+	x.ra = to_decimal(ra);
+	x.SH = to_decimal(SH);
+	x.mb = to_decimal(mb);
+	x.me = to_decimal(me);
+	x.rc = to_decimal(rc);
+
+	return x;
+}
+
+fields to_b(vll v)
+{
+	fields x;
+	vll po, bo, bi , bd, aa, lk;
+	fr(i, 0, 6)
+	{
+		po.push_back(v[i]);
+	}
+	fr(i, 6, 11)
+	{
+		bo.push_back(v[i]);
+	}
+	fr(i, 11, 16)
+	{
+		bi.push_back(v[i]);
+	}
+	fr(i, 16, 30)
+	{
+		bd.push_back(v[i]);
+	}
+	fr(i, 30, 31){
+		aa.push_back(v[i]);
+	}
+	fr(i, 31, 32){
+		lk.push_back(v[i]);
+	}
+	x.po = to_decimal(po);
+	x.bo = to_decimal(bo);
+	x.bi = to_decimal(bi);
+	x.bd = to_decimal(bd);
+	x.aa = to_decimal(aa);
+	x.lk = to_decimal(lk);
+
+	return x;
+}
+
+fields to_ds(vll v){
+
+	fields x;
+	vll po,rt,ra,ds,xo;
+
+	fr(i,0,6){
+		po.push_back(v[i]);
+	}
+	fr(i,6,11){
+		rt.push_back(v[i]);
+	}
+	fr(i,11,16){
+		ra.push_back(v[i]);
+	}
+	fr(i,16,30){
+		ds.push_back(v[i]);
+	}
+	fr(i,30,32){
+		xo.push_back(v[i]);
+	}
+
+	x.po = to_decimal(po);
+	x.rt = to_decimal(rt);
+	x.ra = to_decimal(ra);
+	x.ds = to_decimal(ds);
+	x.xo = to_decimal(xo);
+
+	return x;
+	
+}
+
+
 /*---------------------ALL THE INSTRUCTIONS ---------------*/
+void add(vll v){
+
+	fields x = to_xo(v);
+	r.r[x.rt] = r.r[x.ra] + r.r[x.rb];
+}
+
+void addi(vll v){
+
+	fields x = to_d(v);
+	r.r[x.rt] = r.r[x.ra] + x.si;
+}
 
 void and2(vll v)
 {
 	fields x = to_x(v);
 	r.r[x.ra] = r.r[x.rs] & r.r[x.rb];
+}
+
+void andi(vll v)
+{
+	fields x = to_d(v);
+	r.r[x.rt] = r.r[x.ra] & x.si;
 }
 
 void extsw(vll v)
@@ -144,16 +372,42 @@ void nand(vll v)
 	r.r[x.ra] = !(r.r[x.rs] & r.r[x.rb]);
 }
 
+void lwz(vll v)
+{
+        
+     fields x = to_d(v);
+     r.r[x.rt] = m_mem[r.r[x.ra]+x.si];
+}
+
+void stw(vll v)
+{
+
+	fields x = to_d(v);
+	m_mem[r.r[x.ra]+x.si] = r.r[x.rt];
+}
+
 void or2(vll v)
 {
 	fields x = to_x(v);
 	r.r[x.ra] = r.r[x.rs] | r.r[x.rb];
 }
 
+void ori(vll v)
+{
+     fields x = to_d(v);
+     r.r[x.rt] = r.r[x.ra] | x.si;
+}
+
 void xor2(vll v)
 {
 	fields x = to_x(v);
 	r.r[x.ra] = r.r[x.rs] ^ r.r[x.rb];
+}
+
+void xori(vll v)
+{
+     fields x = to_d(v);
+     r.r[x.rt] = r.r[x.ra] ^ x.si;
 }
 
 void sld(vll v)
@@ -189,6 +443,26 @@ void cmp(vll v)
 	r.cr >>= 4;
 	r.cr <<= 4;
 	ll a = r.r[x.ra], b = r.r[x.rb];
+	if (a < b)
+	{
+		r.cr |= 8;
+	}
+	else if (a > b)
+	{
+		r.cr |= 4;
+	}
+	else
+	{
+		r.cr |= 2;
+	}
+}
+
+void cmpi(vll v){
+
+	fields x = to_d(v);
+	r.cr >>= 4;
+	r.cr <<= 4;
+	ll a = r.r[x.ra],b = x.si;
 	if (a < b)
 	{
 		r.cr |= 8;
@@ -256,7 +530,7 @@ void sc(vll v)
 
 void bl(vll v)
 {
-	fields x = to_x(v);
+	fields x = to_i(v);
 	r.lr = r.cia + 4;
 	r.nia += x.li;
 }
@@ -285,14 +559,10 @@ void opcode31(vll v)
 		sld(v);
 	case 28:
 		and2(v);
-	case 40:
-		subf(v);
 	case 266:
 		add(v);
 	case 316:
 		xor2(v);
-	case 413:
-		sradi(v);
 	case 444:
 		or2(v);
 	case 476:
@@ -302,6 +572,7 @@ void opcode31(vll v)
 	case 794:
 		srad(v);
 	case 986:
+	    extsw(v);
 	default:
 	{
 		cout << "wrong XO at instruction " << r.cia << endl;
@@ -324,42 +595,21 @@ void divide_by_opcode(vll v)
 		cmpi(v);
 	case 14:
 		addi(v);
-	case 15:
-		addis(v);
 	case 17:
 		sc(v);
-	case 18:
-		opcode18(v);
-	case 19:
-		opcode19(v);
-	case 21:
-		rlwinm(v);
 	case 24:
 		ori(v);
 	case 26:
 		xori(v);
-	case 28:
-		andi(v);
+    case 28:
+        andi(v);
 	case 31:
 		opcode31(v);
-	case 34:
-		lbz(v);
+	case 32:
+		lwz(v);
 	case 36:
 		stw(v);
-	case 37:
-		stwu(v);
-	case 38:
-		stb(v);
-	case 40:
-		lhz(v);
-	case 42:
-		lha(v);
-	case 44:
-		sth(v);
-	case 58:
-		ld(v);
-	case 62:
-		std(v);
+
 	default:
 	{
 		cout << "Wrong instruction\n";
