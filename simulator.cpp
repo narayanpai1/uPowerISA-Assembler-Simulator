@@ -7,6 +7,19 @@ typedef vector<ll> vll;
 #define fr(i, a, b) for (long long i = a; i < b; ++i)
 #define fr2(i, b, a) for (long long i = b; i >= a; --i)
 
+template <typename T>
+void show_vector(vector<T> v)
+{
+	cout << endl
+		 << "The vector is ";
+	int i;
+	fr(i, 0, v.size())
+	{
+		cout << v[i] << " ";
+	}
+	cout << endl;
+}
+
 struct Register
 {
 	ll r[32];
@@ -38,19 +51,18 @@ map<ll, ll> m_mem;
 ll to_decimal(vll v)
 {
 	ll rv = 0;
-	fr2(i, v.size() - 1, 0)
+	fr(i, 0, v.size())
 	{
 		rv = 2 * rv + v[i];
 	}
 	return rv;
 }
 
-
 struct fields
 {
 	ll po, rs, ra, rb, xo, rc;
 	//NOTE THE DIFFERENCE B/W sh, SH
-	ll sh, SH,sh1;
+	ll sh, SH, sh1;
 	ll rt, si, mb, me, bo, bi, bd, aa, lk, oe, ds, li;
 };
 fields to_x(vll v)
@@ -119,30 +131,38 @@ fields to_i(vll v)
 	return x;
 }
 
-fields to_xo(vll v){
+fields to_xo(vll v)
+{
 
 	fields x;
-	vll po,rt,ra,rb,oe,xo,rc;
+	vll po, rt, ra, rb, oe, xo, rc;
 
-	fr(i,0,6){
+	fr(i, 0, 6)
+	{
 		po.push_back(v[i]);
 	}
-	fr(i,6,11){
+	fr(i, 6, 11)
+	{
 		rt.push_back(v[i]);
 	}
-	fr(i,11,16){
+	fr(i, 11, 16)
+	{
 		ra.push_back(v[i]);
 	}
-	fr(i,16,21){
+	fr(i, 16, 21)
+	{
 		rb.push_back(v[i]);
 	}
-	fr(i,21,22){
+	fr(i, 21, 22)
+	{
 		oe.push_back(v[i]);
 	}
-	fr(i,22,31){
+	fr(i, 22, 31)
+	{
 		xo.push_back(v[i]);
 	}
-	fr(i,31,32){
+	fr(i, 31, 32)
+	{
 		rc.push_back(v[i]);
 	}
 
@@ -157,30 +177,38 @@ fields to_xo(vll v){
 	return x;
 }
 
-fields to_xs(vll v){
+fields to_xs(vll v)
+{
 
 	fields x;
-	vll po,rs,ra,sh,xo,sh1,rc;
+	vll po, rs, ra, sh, xo, sh1, rc;
 
-	fr(i,0,6){
+	fr(i, 0, 6)
+	{
 		po.push_back(v[i]);
 	}
-	fr(i,6,11){
+	fr(i, 6, 11)
+	{
 		rs.push_back(v[i]);
 	}
-	fr(i,11,16){
+	fr(i, 11, 16)
+	{
 		ra.push_back(v[i]);
 	}
-	fr(i,16,21){
+	fr(i, 16, 21)
+	{
 		sh.push_back(v[i]);
 	}
-	fr(i,21,30){
+	fr(i, 21, 30)
+	{
 		xo.push_back(v[i]);
 	}
-	fr(i,30,31){
+	fr(i, 30, 31)
+	{
 		sh1.push_back(v[i]);
 	}
-	fr(i,31,32){
+	fr(i, 31, 32)
+	{
 		rc.push_back(v[i]);
 	}
 
@@ -223,30 +251,38 @@ fields to_d(vll v)
 	return x;
 }
 
-fields to_m(vll v){
+fields to_m(vll v)
+{
 
 	fields x;
-	vll po,rs,ra,SH,mb,me,rc;
+	vll po, rs, ra, SH, mb, me, rc;
 
-	fr(i,0,6){
+	fr(i, 0, 6)
+	{
 		po.push_back(v[i]);
 	}
-	fr(i,6,11){
+	fr(i, 6, 11)
+	{
 		rs.push_back(v[i]);
 	}
-	fr(i,11,16){
+	fr(i, 11, 16)
+	{
 		ra.push_back(v[i]);
 	}
-	fr(i,16,21){
+	fr(i, 16, 21)
+	{
 		SH.push_back(v[i]);
 	}
-	fr(i,21,26){
+	fr(i, 21, 26)
+	{
 		mb.push_back(v[i]);
 	}
-	fr(i,26,31){
+	fr(i, 26, 31)
+	{
 		me.push_back(v[i]);
 	}
-	fr(i,31,32){
+	fr(i, 31, 32)
+	{
 		rc.push_back(v[i]);
 	}
 
@@ -264,7 +300,7 @@ fields to_m(vll v){
 fields to_b(vll v)
 {
 	fields x;
-	vll po, bo, bi , bd, aa, lk;
+	vll po, bo, bi, bd, aa, lk;
 	fr(i, 0, 6)
 	{
 		po.push_back(v[i]);
@@ -281,10 +317,12 @@ fields to_b(vll v)
 	{
 		bd.push_back(v[i]);
 	}
-	fr(i, 30, 31){
+	fr(i, 30, 31)
+	{
 		aa.push_back(v[i]);
 	}
-	fr(i, 31, 32){
+	fr(i, 31, 32)
+	{
 		lk.push_back(v[i]);
 	}
 	x.po = to_decimal(po);
@@ -297,24 +335,30 @@ fields to_b(vll v)
 	return x;
 }
 
-fields to_ds(vll v){
+fields to_ds(vll v)
+{
 
 	fields x;
-	vll po,rt,ra,ds,xo;
+	vll po, rt, ra, ds, xo;
 
-	fr(i,0,6){
+	fr(i, 0, 6)
+	{
 		po.push_back(v[i]);
 	}
-	fr(i,6,11){
+	fr(i, 6, 11)
+	{
 		rt.push_back(v[i]);
 	}
-	fr(i,11,16){
+	fr(i, 11, 16)
+	{
 		ra.push_back(v[i]);
 	}
-	fr(i,16,30){
+	fr(i, 16, 30)
+	{
 		ds.push_back(v[i]);
 	}
-	fr(i,30,32){
+	fr(i, 30, 32)
+	{
 		xo.push_back(v[i]);
 	}
 
@@ -325,18 +369,18 @@ fields to_ds(vll v){
 	x.xo = to_decimal(xo);
 
 	return x;
-	
 }
 
-
 /*---------------------ALL THE INSTRUCTIONS ---------------*/
-void add(vll v){
+void add(vll v)
+{
 
 	fields x = to_xo(v);
 	r.r[x.rt] = r.r[x.ra] + r.r[x.rb];
 }
 
-void addi(vll v){
+void addi(vll v)
+{
 
 	fields x = to_d(v);
 	r.r[x.rt] = r.r[x.ra] + x.si;
@@ -374,16 +418,16 @@ void nand(vll v)
 
 void lwz(vll v)
 {
-        
-     fields x = to_d(v);
-     r.r[x.rt] = m_mem[r.r[x.ra]+x.si];
+
+	fields x = to_d(v);
+	r.r[x.rt] = m_mem[r.r[x.ra] + x.si];
 }
 
 void stw(vll v)
 {
 
 	fields x = to_d(v);
-	m_mem[r.r[x.ra]+x.si] = r.r[x.rt];
+	m_mem[r.r[x.ra] + x.si + 4] = r.r[x.rt];
 }
 
 void or2(vll v)
@@ -394,8 +438,8 @@ void or2(vll v)
 
 void ori(vll v)
 {
-     fields x = to_d(v);
-     r.r[x.rt] = r.r[x.ra] | x.si;
+	fields x = to_d(v);
+	r.r[x.rt] = r.r[x.ra] | x.si;
 }
 
 void xor2(vll v)
@@ -406,8 +450,8 @@ void xor2(vll v)
 
 void xori(vll v)
 {
-     fields x = to_d(v);
-     r.r[x.rt] = r.r[x.ra] ^ x.si;
+	fields x = to_d(v);
+	r.r[x.rt] = r.r[x.ra] ^ x.si;
 }
 
 void sld(vll v)
@@ -457,12 +501,13 @@ void cmp(vll v)
 	}
 }
 
-void cmpi(vll v){
+void cmpi(vll v)
+{
 
 	fields x = to_d(v);
 	r.cr >>= 4;
 	r.cr <<= 4;
-	ll a = r.r[x.ra],b = x.si;
+	ll a = r.r[x.ra], b = x.si;
 	if (a < b)
 	{
 		r.cr |= 8;
@@ -479,7 +524,7 @@ void cmpi(vll v){
 
 void sc(vll v)
 {
-	switch (r.r[3])
+	switch (r.r[2])
 	{
 	case 1:
 	{
@@ -555,24 +600,34 @@ void opcode31(vll v)
 	{
 	case 0:
 		cmp(v);
+		break;
 	case 27:
 		sld(v);
+		break;
 	case 28:
 		and2(v);
+		break;
 	case 266:
 		add(v);
+		break;
 	case 316:
 		xor2(v);
+		break;
 	case 444:
 		or2(v);
+		break;
 	case 476:
 		nand(v);
+		break;
 	case 539:
 		srd(v);
+		break;
 	case 794:
 		srad(v);
+		break;
 	case 986:
-	    extsw(v);
+		extsw(v);
+		break;
 	default:
 	{
 		cout << "wrong XO at instruction " << r.cia << endl;
@@ -593,22 +648,31 @@ void divide_by_opcode(vll v)
 	{
 	case 11:
 		cmpi(v);
+		break;
 	case 14:
 		addi(v);
+		break;
 	case 17:
 		sc(v);
+		break;
 	case 24:
 		ori(v);
+		break;
 	case 26:
 		xori(v);
-    case 28:
-        andi(v);
+		break;
+	case 28:
+		andi(v);
+		break;
 	case 31:
 		opcode31(v);
+		break;
 	case 32:
 		lwz(v);
+		break;
 	case 36:
 		stw(v);
+		break;
 
 	default:
 	{
@@ -625,7 +689,7 @@ void store_instruction(vll v, ll index)
 void store_memory(vll v, ll index)
 {
 	ll val = to_decimal(v);
-	m_mem[268435456 + (index)] = val;
+	m_mem[index * 4] = val;
 }
 
 bool is_system_call(vll v)
@@ -642,7 +706,7 @@ void execute(ll index)
 {
 	if (m_inst[index].size() == 0)
 	{
-		cout << "Instruction not found\n";
+		cout << "Iznstruction not found\n";
 		exit(0);
 	}
 	divide_by_opcode(m_inst[index]);
@@ -678,23 +742,10 @@ int main(int argc, char *argv[])
 {
 	/*----------INPUT ------------*/
 	vll input;
-	if (argc == 2)
+	char x;
+	while (cin >> x)
 	{
-		FILE *fp = fopen(argv[1], "r");
-
-		while (1)
-		{
-			char x = fgetc(fp);
-			input.push_back(x - '0');
-			if (feof(fp))
-				break;
-		}
-	}
-	else
-	{
-		cout << "Format not proper" << endl;
-		cout << "Format is ./a.out binary_file" << endl;
-		return 0;
+		input.push_back(x - '0');
 	}
 	/*----------------------------*/
 
@@ -703,17 +754,17 @@ int main(int argc, char *argv[])
 	fr(i, 0, 32)
 	{
 		v.push_back(input[0]);
-		input.pop_back();
+		input.erase(input.begin());
 	}
-	ll data_size = to_decimal(v);
+	ll text_size = to_decimal(v);
 	v.clear();
 
 	fr(i, 0, 32)
 	{
 		v.push_back(input[0]);
-		input.pop_back();
+		input.erase(input.begin());
 	}
-	ll text_size = to_decimal(v);
+	ll data_size = to_decimal(v);
 	/*----------------------------*/
 
 	/*---------MAP ALL INSTRUCTIONS AND MEMORY TO ADDRESS------*/
@@ -723,7 +774,7 @@ int main(int argc, char *argv[])
 		fr(j, 0, 32)
 		{
 			v.push_back(input[0]);
-			input.pop_back();
+			input.erase(input.begin());
 		}
 		store_instruction(v, i);
 	}
@@ -731,10 +782,10 @@ int main(int argc, char *argv[])
 	fr(i, 0, data_size)
 	{
 		v.clear();
-		fr(j, 0, 8)
+		fr(j, 0, 32)
 		{
 			v.push_back(input[0]);
-			input.pop_back();
+			input.erase(input.begin());
 		}
 		store_memory(v, i);
 	}
