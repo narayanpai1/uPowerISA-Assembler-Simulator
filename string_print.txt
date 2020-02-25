@@ -1,0 +1,11 @@
+.data
+str: .asciiz "Hello World"
+
+.text
+la R4, str
+addi R2, R0, 4
+sc lev
+
+#epilogue
+addi R2, R0, 10
+sc lev

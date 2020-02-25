@@ -7,7 +7,7 @@ from Pass2Final import transform
 
 def main():
     print("Enter file name: ")
-    filename = "assembly2.txt"
+    filename = input()
     if len(filename) >= 1:
         with open(filename, encoding="utf-8", mode="r") as Fiile:
             lines = Fiile.read().splitlines()
@@ -15,7 +15,8 @@ def main():
 
             binal = transform(instructions, label, data, bina2)
 
-            with open("output2.o", mode="w") as Fiile:
+            output_file = input("Enter output file name:")
+            with open(output_file, mode="w") as Fiile:
                 final1 = sorted([(i, binal[i]) for i in binal])
                 final1 = [a[1] for a in final1]
                 final1 = "".join(final1)

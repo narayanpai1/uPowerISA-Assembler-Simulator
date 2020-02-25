@@ -1,0 +1,18 @@
+.data
+.text
+main:
+
+addi R3, R0, 0
+addi R1, R0, 10
+stw R1, 0(R3)
+
+addi R2, R0, 5
+stw R2, 0(R28)
+
+add R5, R1, R2
+
+stw R5, 396(R3)
+
+#epilogue
+addi R2, R0, 10
+sc lev

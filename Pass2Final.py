@@ -31,10 +31,7 @@ D = {
     "stb": [38, None, None, None, None, 1],
 }
 
-others = {
-    "bc": [19, 0, 0],
-    "sc": [17, 0, 0],
-}
+others = {"bc": [19, 0, 0], "sc": [17, 0, 0], "b": [18]}
 
 
 def transform(
@@ -71,10 +68,35 @@ def transform(
             bc(instr, req, u, label)
         elif instr == "sc":
             sc(instr, req, u, label)
+        elif instr == "b":
+            b(instr, req, u, label)
         else:
             break
 
     return res
+
+
+def b(instr, req, u, label):
+    bina = "{:06b}".format(others["b"][0])
+    req_instruction = int(label[req[0]], 16)
+    curr_instruction = u
+    to_be_encoded = req_instruction - curr_instruction
+    if to_be_encoded < 0:
+        # 2s compliment
+        curr_index = 22
+        ans = -(1 << 23)
+        bina += "1"
+        while curr_index >= 0:
+            if to_be_encoded - ans >= (1 << curr_index):
+                ans += 1 << curr_index
+                bina += "1"
+            else:
+                bina += "0"
+            curr_index = curr_index - 1
+    else:
+        bina += "{:024b}".format(to_be_encoded)
+    bina += "00"
+    res[u] = bina
 
 
 def sc(instr, req, u, label):
@@ -88,9 +110,10 @@ def sc(instr, req, u, label):
 def bc(instr, req, u, label):
     bina = ""
     bina += "{:06b}".format(others["bc"][0])
-    bina += "{:05b}".format(req[0])
-    bina += "{:05b}".format(req[1])
-    bina += "{:14b}".format(label[req[2]] - u)
+    bina += "{:05b}".format(int(req[0]))
+    bina += "{:05b}".format(int(req[1]))
+    bina += "{:014b}".format(int(label[req[2]], 16) - u)
+    bina += "{:02b}".format(0)
     res[u] = bina
 
 
@@ -118,8 +141,12 @@ def la(instr, req, u, data):
 
 def X_type(instr, req, u):
     bina = ""
+    bina += "{:06b}".format(X[instr][0])
     bina = bina + "{:05b}".format(rtn[req[1]])
-    bina = bina + "{:05b}".format(rtn[req[0]])
+    try:
+        bina = bina + "{:05b}".format(rtn[req[0]])
+    except:
+        bina = bina + "{:05b}".format(int(req[0]))
     bina = bina + "{:05b}".format(rtn[req[2]])
     bina = bina + "{:010b}".format(X[instr][3]) + "0"
     bina = bina.replace("0b", "")

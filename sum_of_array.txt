@@ -1,0 +1,28 @@
+.data
+
+arr: .word 1, 2
+
+.text
+
+main:
+la R10, arr
+addi R11, R10, 8
+
+#R12 will be sum
+
+loop:
+cmp 7, R10, R11
+bc 5, 30, end_of_loop
+lwz R13, 0(R10)
+addi R10, R10, 4
+add R12, R12, R13
+b loop
+
+end_of_loop:
+addi R2, R0, 1
+addi R4, R12, 0
+sc lev
+
+#epilogue
+addi R2, R0, 10
+sc lev

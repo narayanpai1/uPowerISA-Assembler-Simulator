@@ -58,6 +58,16 @@ ll to_decimal(vll v)
 	return rv;
 }
 
+ll to_signed_decimal(vll v)
+{
+	ll rv = 0;
+	rv = -v[0];
+	fr(i, 1, v.size())
+	{
+		rv = 2 * rv + v[i];
+	}
+	return rv;
+}
 struct fields
 {
 	ll po, rs, ra, rb, xo, rc;
@@ -372,6 +382,18 @@ fields to_ds(vll v)
 }
 
 /*---------------------ALL THE INSTRUCTIONS ---------------*/
+
+void b(vll v)
+{
+	vll v2;
+	fr(i, 6, 30)
+	{
+		v2.push_back(v[i]);
+	}
+	ll change = to_signed_decimal(v2);
+	r.nia = r.cia + change;
+}
+
 void add(vll v)
 {
 
@@ -486,7 +508,7 @@ void cmp(vll v)
 	fields x = to_x(v);
 	r.cr >>= 4;
 	r.cr <<= 4;
-	ll a = r.r[x.ra], b = r.r[x.rb];
+	ll a = r.r[x.rs], b = r.r[x.rb];
 	if (a < b)
 	{
 		r.cr |= 8;
@@ -524,6 +546,7 @@ void cmpi(vll v)
 
 void sc(vll v)
 {
+	r.srr0 = r.nia;
 	switch (r.r[2])
 	{
 	case 1:
@@ -537,6 +560,7 @@ void sc(vll v)
 		while (m_mem[temp])
 		{
 			cout << (char)m_mem[temp];
+			temp += 4;
 		}
 		cout << endl;
 		break;
@@ -584,6 +608,26 @@ void bclr(vll v)
 {
 	fields x = to_x(v);
 	r.nia = r.lr;
+}
+
+void bc(vll v)
+{
+	fields x = to_b(v);
+	if (x.bo == 28)
+	{
+		if ((1 << 3) & r.cr)
+			r.nia = x.bd;
+	}
+	else if (x.bo == 29)
+	{
+		if ((1 << 2) & r.cr)
+			r.nia = x.bd;
+	}
+	else
+	{
+		if ((1 << 1) & r.cr)
+			r.nia = r.cia + x.bd;
+	}
 }
 /*--------------------------------------------------------*/
 
@@ -654,6 +698,12 @@ void divide_by_opcode(vll v)
 		break;
 	case 17:
 		sc(v);
+		break;
+	case 18:
+		b(v);
+		break;
+	case 19:
+		bc(v);
 		break;
 	case 24:
 		ori(v);

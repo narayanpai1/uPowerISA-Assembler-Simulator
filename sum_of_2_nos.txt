@@ -1,0 +1,22 @@
+.data
+X: .word 2
+#defegfer
+Y: .word 4
+
+#dfvrve
+.text
+main:
+la R2, X
+la R3, Y
+#ferf
+lwz R8, 0(R2)
+lwz R9, 0(R3)
+add R10, R9, R8
+addi R2, R0, 1
+addi R4, R10, 0
+sc lev
+
+#epilogue
+addi R2, R0, 10
+sc lev
+
