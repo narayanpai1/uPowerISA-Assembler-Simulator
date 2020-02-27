@@ -738,7 +738,7 @@ void store_instruction(vll v, ll index)
 
 void store_memory(vll v, ll index)
 {
-	ll val = to_decimal(v);
+	ll val = to_signed_decimal(v);
 	m_mem[index * 4] = val;
 }
 

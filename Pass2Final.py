@@ -1,3 +1,5 @@
+from Pass1Final import convert_to_bin
+
 rtn = {"R" + str(i): i for i in range(32)}  # converting register to number
 res = {}  # result
 
@@ -37,10 +39,8 @@ others = {"bc": [19, 0, 0], "sc": [17, 0, 0], "b": [18]}
 def transform(
     lines, label, data, bina2
 ):  # iterating over all lines to transform into 32 bit instructions
-    print(lines)
     for l in lines:
 
-        print(l)
         u = l
         v = lines[l]  # doubt lines[l] -> l
 
@@ -81,20 +81,7 @@ def b(instr, req, u, label):
     req_instruction = int(label[req[0]], 16)
     curr_instruction = u
     to_be_encoded = req_instruction - curr_instruction
-    if to_be_encoded < 0:
-        # 2s compliment
-        curr_index = 22
-        ans = -(1 << 23)
-        bina += "1"
-        while curr_index >= 0:
-            if to_be_encoded - ans >= (1 << curr_index):
-                ans += 1 << curr_index
-                bina += "1"
-            else:
-                bina += "0"
-            curr_index = curr_index - 1
-    else:
-        bina += "{:024b}".format(to_be_encoded)
+    bina += convert_to_bin(to_be_encoded, 24)
     bina += "00"
     res[u] = bina
 
