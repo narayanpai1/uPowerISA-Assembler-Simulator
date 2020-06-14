@@ -1,12 +1,12 @@
 .data
 
-arr: .word 1, 2
+arr: .word -6, 10, 1
 
 .text
 
 main:
 la R10, arr
-addi R11, R10, 8
+addi R11, R10, 12
 
 #R12 will be sum
 

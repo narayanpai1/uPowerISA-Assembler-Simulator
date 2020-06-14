@@ -1,27 +1,5 @@
 import re
-
-
-def convert_to_bin(to_be_encoded, siz):
-    bina = ""
-    if to_be_encoded < 0:
-        # 2s compliment
-        curr_index = siz - 2
-        ans = -(1 << (siz - 1))
-        bina += "1"
-        while curr_index >= 0:
-            if to_be_encoded - ans >= (1 << curr_index):
-                ans += 1 << curr_index
-                bina += "1"
-            else:
-                bina += "0"
-            curr_index = curr_index - 1
-    else:
-        if siz == 24:
-            bina += "{:024b}".format(to_be_encoded)
-        else:
-            bina += "{:032b}".format(to_be_encoded)
-    return bina
-
+from util import *
 
 def pass1(lines):
     f = lines
@@ -108,3 +86,43 @@ def pass1(lines):
                 print("Error during data section")
             dataseg[start_location] = bina
     return (instruction, dataseg, text, data)
+
+
+def pass2(
+    lines, label, data, bina2
+):  # iterating over all lines to transform into 32 bit instructions
+    for l in lines:
+
+        u = l
+        v = lines[l]  # doubt lines[l] -> l
+
+        instr = v[: v.index(" ")]
+        argu = v[v.index(" ") :]
+        # print(instr, "read ")
+        # print(argu)
+
+        req = argu.split(",")
+        req = [i.replace(" ", "") for i in req]
+
+        if instr in X.keys():
+            X_type(instr, req, u)
+
+        elif instr in XO.keys():
+            XO_type(instr, req, u)
+
+        elif instr in D.keys():
+            D_type(instr, req, u)
+
+        elif instr == "la":
+            la(instr, req, u, data)
+
+        elif instr == "bc":
+            bc(instr, req, u, label)
+        elif instr == "sc":
+            sc(instr, req, u, label)
+        elif instr == "b":
+            b(instr, req, u, label)
+        else:
+            break
+
+    return res

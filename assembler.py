@@ -1,8 +1,5 @@
 import sys
-
-from Pass1Final import pass1
-
-from Pass2Final import transform
+from passes import *
 
 
 def main():
@@ -11,17 +8,17 @@ def main():
     if len(filename) >= 1:
         with open(filename, encoding="utf-8", mode="r") as Fiile:
             lines = Fiile.read().splitlines()
-            (instructions, bina2, label, data) = pass1(lines)
+            (instructions, dataseg, label, data) = pass1(lines)
 
-            binal = transform(instructions, label, data, bina2)
+            textseg = pass2(instructions, label, data, dataseg)
 
             output_file = input("Enter output file name:")
             with open(output_file, mode="w") as Fiile:
-                final1 = sorted([(i, binal[i]) for i in binal])
+                final1 = sorted([(i, textseg[i]) for i in textseg])
                 final1 = [a[1] for a in final1]
                 final1 = "".join(final1)
 
-                final2 = sorted([(i, bina2[i]) for i in bina2])
+                final2 = sorted([(i, dataseg[i]) for i in dataseg])
                 final2 = [a[1] for a in final2]
                 final2 = "".join(final2)
 
@@ -57,12 +54,12 @@ def main():
     print("\n\n")
 
     print("Text segment: \n")
-    for binu in binal.keys():
-        print(binu, binal[binu], sep="  ")
+    for binu in textseg.keys():
+        print(binu, textseg[binu], sep="  ")
 
     print("Data segment: \n")
-    for binu in bina2.keys():
-        print(binu, bina2[binu], sep="  ")
+    for binu in dataseg.keys():
+        print(binu, dataseg[binu], sep="  ")
 
 
 if __name__ == "__main__":

@@ -2,7 +2,7 @@
 
 To run the assembler:
 
-    $ python3 link.py
+    $ python3 assembler.py
 
 To run the simulator:
 
