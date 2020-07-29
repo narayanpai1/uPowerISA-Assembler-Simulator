@@ -1,10 +1,21 @@
 # uPower ISA Assembler and Simulator
 
-To run the assembler:
+This repository consists of 2 applications:
+1. An assembler for converting assembly code written in uPOWER(a subset of the IBM-POWER ISA) into object code. 
 
-    $ python3 assembler.py
+   Command to run the assembler:
 
-To run the simulator:
+        $ python assembler.py
 
-    $ g++ simulator.cpp
-    $ ./a.out < binary_file
+    The program takes in the input and the output file names to read the assembly code and save the binary output respectively.
+   
+2. A simulator to run the object code and display the desired output.
+
+    Command to run the simulator:
+
+        $ g++ simulator.cpp
+        $ ./a.out < binary_file
+
+Sample assembly programs for reference are also present in the repo.
+
+Refer [this](https://drive.google.com/file/d/1OOS8Qv906oqScWoYSKW1coyaCayzalFJ/view?usp=sharing) link for more details on uPower ISA.
